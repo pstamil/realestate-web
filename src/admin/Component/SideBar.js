@@ -107,9 +107,11 @@ const Drawer = styled(MuiDrawer, {
   },
 }));
 
-export default function SideBar() {
+export default function SideBar({ userRole, setIsAuthenticated }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+
+  console.log(userRole);
 
   const navigate = useNavigate();
 
@@ -128,6 +130,12 @@ export default function SideBar() {
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleLogout = () => {
+    // Clear the user's authentication state and redirect to the login page
+    setIsAuthenticated(null);
+    navigate("/");
   };
 
   return (
@@ -225,32 +233,64 @@ export default function SideBar() {
               transformOrigin={{ horizontal: "right", vertical: "top" }}
               anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
             >
-              <Link to="" style={{ textDecoration: "none", color: "black" }}>
-                <MenuItem onClick={handleClose}>
+              <Link
+                to={`/${userRole}/profile`}
+                style={{
+                  textDecoration: "none",
+                  color: "black",
+                }}
+              >
+                <MenuItem onClick={handleClose} sx={{ fontSize: "14px" }}>
                   <Avatar /> Profile
                 </MenuItem>
               </Link>
               <Divider />
-              <Link to="" style={{ textDecoration: "none", color: "black" }}>
-                <MenuItem onClick={handleClose}>
-                  <ListItemIcon>
-                    <PersonAdd fontSize="small" />
-                  </ListItemIcon>
-                  Add new user
-                </MenuItem>
-              </Link>
+              {userRole !== "employee" && (
+                <Link
+                  to={`/${userRole}/adduser`}
+                  style={{ textDecoration: "none", color: "black" }}
+                >
+                  <MenuItem onClick={handleClose} sx={{ fontSize: "14px" }}>
+                    <ListItemIcon>
+                      <PersonAdd fontSize="small" />
+                    </ListItemIcon>
+                    Add new user
+                  </MenuItem>
+                </Link>
+              )}
+
               <Link
-                to="/admin/settings"
-                style={{ textDecoration: "none", color: "black" }}
+                to={`/${userRole}/allproperty`}
+                style={{
+                  textDecoration: "none",
+                  color: "black",
+                }}
               >
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={handleClose} sx={{ fontSize: "14px" }}>
                   <ListItemIcon>
                     <CategoryIcon fontSize="small" />
                   </ListItemIcon>
                   Properties
                 </MenuItem>
               </Link>
-              <MenuItem onClick={handleClose}>
+              <Link
+                to={`/${userRole}/addproperty`}
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                <MenuItem onClick={handleClose} sx={{ fontSize: "14px" }}>
+                  <ListItemIcon>
+                    <AddHome fontSize="small" />
+                  </ListItemIcon>
+                  Add Property
+                </MenuItem>
+              </Link>
+              <MenuItem
+                sx={{ fontSize: "14px" }}
+                onClick={() => {
+                  handleLogout();
+                  handleClose();
+                }}
+              >
                 <ListItemIcon>
                   <Logout fontSize="small" />
                 </ListItemIcon>
@@ -275,7 +315,7 @@ export default function SideBar() {
               disablePadding
               sx={{ display: "block" }}
               onClick={() => {
-                navigate("/admin");
+                navigate(`/${userRole}`);
               }}
             >
               <ListItemButton
@@ -306,7 +346,7 @@ export default function SideBar() {
               disablePadding
               sx={{ display: "block" }}
               onClick={() => {
-                navigate("/admin/allproperty");
+                navigate(`/${userRole}/allproperty`);
               }}
             >
               <ListItemButton
@@ -337,7 +377,7 @@ export default function SideBar() {
               disablePadding
               sx={{ display: "block" }}
               onClick={() => {
-                navigate("/admin/addproperty");
+                navigate(`/${userRole}/addproperty`);
               }}
             >
               <ListItemButton
@@ -364,42 +404,45 @@ export default function SideBar() {
                 />
               </ListItemButton>
             </ListItem>
-            <ListItem
-              disablePadding
-              sx={{ display: "block" }}
-              onClick={() => {
-                navigate("/admin/adduser");
-              }}
-            >
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
+            {userRole !== "employee" && (
+              <ListItem
+                disablePadding
+                sx={{ display: "block" }}
+                onClick={() => {
+                  navigate("/admin/adduser");
                 }}
               >
-                <ListItemIcon
+                <ListItemButton
                   sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                    color: "white",
+                    minHeight: 48,
+                    justifyContent: open ? "initial" : "center",
+                    px: 2.5,
                   }}
                 >
-                  <PersonAdd />
-                </ListItemIcon>
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 0,
+                      mr: open ? 3 : "auto",
+                      justifyContent: "center",
+                      color: "white",
+                    }}
+                  >
+                    <PersonAdd />
+                  </ListItemIcon>
 
-                <ListItemText
-                  primary="Add user"
-                  sx={{ opacity: open ? 1 : 0, color: "white" }}
-                />
-              </ListItemButton>
-            </ListItem>
+                  <ListItemText
+                    primary="Add user"
+                    sx={{ opacity: open ? 1 : 0, color: "white" }}
+                  />
+                </ListItemButton>
+              </ListItem>
+            )}
+
             <ListItem
               disablePadding
               sx={{ display: "block" }}
               onClick={() => {
-                navigate("/admin/profile");
+                navigate(`/${userRole}/profile`);
               }}
             >
               <ListItemButton
@@ -429,9 +472,7 @@ export default function SideBar() {
             <ListItem
               disablePadding
               sx={{ display: "block" }}
-              onClick={() => {
-                navigate("/");
-              }}
+              onClick={handleLogout}
             >
               <ListItemButton
                 sx={{

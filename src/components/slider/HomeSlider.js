@@ -7,19 +7,20 @@ import home4 from "./homeSlides/home4.jpg";
 import SimpleImageSlider from "react-simple-image-slider";
 import { Box } from "@mui/material";
 
-const images = [
-  { url: `${home}`, loading: "lazy" },
-  { url: `${home1}`, loading: "lazy" },
-  { url: `${home2}`, loading: "lazy" },
-  { url: `${home3}`, loading: "lazy" },
-  { url: `${home4}`, loading: "lazy" },
-];
 function HomeSlider() {
+  const images = [
+    { url: `${home}` },
+    { url: `${home1}` },
+    { url: `${home2}` },
+    { url: `${home3}` },
+    { url: `${home4}` },
+  ];
+
   return (
     <Box>
       <SimpleImageSlider
         width="100%"
-        height={650}
+        height="100vh"
         images={images}
         autoPlay={true}
         autoPlayDelay={50}

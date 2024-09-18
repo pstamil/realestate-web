@@ -580,20 +580,27 @@ const EditProperty = () => {
           </Grid>
         </Grid>
 
-        <Box sx={{ display: "flex", gap: 3 }}>
+        <Box
+          sx={{
+            display: "flex",
+            gap: 3,
+          }}
+        >
           <Button
             onClick={handleFormSubmit}
             size="medium"
             color="success"
             variant="contained"
+            sx={{ textTransform: "none" }}
           >
-            Update Property
+            Update
           </Button>
           <Button
             onClick={() => navigate("/admin/allproperty")}
             size="medium"
             color="error"
             variant="contained"
+            sx={{ textTransform: "none" }}
           >
             Cancel
           </Button>

@@ -1,4 +1,10 @@
-import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+import {
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import "./App.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -33,21 +39,21 @@ import AddUser from "./admin/Page/AddUser";
 import EditProperty from "./admin/Page/AddProperty/EditProperty";
 
 function PrivateRoute({ element, allowedRoles, isAuthenticated }) {
+  const navigate = useNavigate();
+
   if (!isAuthenticated) {
     return <Navigate to="/login" />;
   }
 
-  if (!allowedRoles.includes("admin")) {
-    return <Navigate to="/" />;
+  if (!allowedRoles.includes(isAuthenticated)) {
+    return navigate(isAuthenticated === "admin" ? "/admin" : "/employee");
   }
-
-  console.log("Rendering private route...");
 
   return element;
 }
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
   // Simulate a delay for demonstration purposes
@@ -121,7 +127,12 @@ function App() {
               path="/admin"
               element={
                 <PrivateRoute
-                  element={<SideBar />}
+                  element={
+                    <SideBar
+                      userRole={isAuthenticated}
+                      setIsAuthenticated={setIsAuthenticated}
+                    />
+                  }
                   allowedRoles={["admin"]}
                   isAuthenticated={isAuthenticated} // List allowed roles for this route
                 />
@@ -133,6 +144,29 @@ function App() {
               <Route path="addproperty" element={<AddProperty />} />
               <Route path="profile" element={<Profile />} />
               <Route path="adduser" element={<AddUser />} />
+              <Route path="*" element={<NotFoundPage />} />
+            </Route>
+
+            <Route
+              path="/employee"
+              element={
+                <PrivateRoute
+                  element={
+                    <SideBar
+                      userRole={isAuthenticated}
+                      setIsAuthenticated={setIsAuthenticated}
+                    />
+                  }
+                  allowedRoles={["employee"]}
+                  isAuthenticated={isAuthenticated}
+                />
+              }
+            >
+              <Route index element={<Dashboard />} />
+              <Route path="allproperty" element={<AllPropertyTable />} />
+              <Route path="allproperty/edit/:id" element={<EditProperty />} />
+              <Route path="addproperty" element={<AddProperty />} />
+              <Route path="profile" element={<Profile />} />
               <Route path="*" element={<NotFoundPage />} />
             </Route>
           </Routes>

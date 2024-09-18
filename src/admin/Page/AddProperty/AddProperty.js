@@ -239,7 +239,7 @@ const AddProperty = () => {
               >
                 <MenuItem value="NRI">NRI</MenuItem>
                 <MenuItem value="Premium">Premium</MenuItem>
-                <MenuItem value="No">No</MenuItem>
+                <MenuItem value="N/A">N/A</MenuItem>
               </Select>
             </FormControl>
           </Grid>
@@ -252,8 +252,9 @@ const AddProperty = () => {
                 value={approval}
                 onChange={(e) => setApproval(e.target.value)}
               >
-                <MenuItem value="Yes">Yes</MenuItem>
-                <MenuItem value="No">No</MenuItem>
+                <MenuItem value="Approved">Approved</MenuItem>
+                <MenuItem value="Unapproved">Unapproved</MenuItem>
+                <MenuItem value="N/A">N/A</MenuItem>
               </Select>
             </FormControl>
           </Grid>
@@ -389,7 +390,8 @@ const AddProperty = () => {
                 value={powerBackup}
                 onChange={(e) => setPowerBackup(e.target.value)}
               >
-                <MenuItem value="Available">Available</MenuItem>
+                <MenuItem value="Yes">Yes</MenuItem>
+                <MenuItem value="No">No</MenuItem>
                 <MenuItem value="N/A">N/A</MenuItem>
               </Select>
             </FormControl>
@@ -403,8 +405,10 @@ const AddProperty = () => {
                 value={waterFacility}
                 onChange={(e) => setWaterFacility(e.target.value)}
               >
-                <MenuItem value="Yes">Yes</MenuItem>
-                <MenuItem value="No">No</MenuItem>
+                <MenuItem value="Metro">Metro</MenuItem>
+                <MenuItem value="Borvel">Borvel</MenuItem>
+                <MenuItem value="Corporation">Corporation</MenuItem>
+                <MenuItem value="N/A">N/A</MenuItem>
               </Select>
             </FormControl>
           </Grid>
@@ -416,11 +420,23 @@ const AddProperty = () => {
                 variant="outlined"
                 value={facing}
                 onChange={(e) => setFacing(e.target.value)}
+                MenuProps={{
+                  PaperProps: {
+                    style: {
+                      maxHeight: 300,
+                    },
+                  },
+                }}
               >
                 <MenuItem value="North">North</MenuItem>
                 <MenuItem value="South">South</MenuItem>
                 <MenuItem value="East">East</MenuItem>
                 <MenuItem value="West">West</MenuItem>
+                <MenuItem value="North-East">North-East</MenuItem>
+                <MenuItem value="North-West">North-West</MenuItem>
+                <MenuItem value="South-East">South-East</MenuItem>
+                <MenuItem value="South-West">South-West</MenuItem>
+                <MenuItem value="N/A">N/A</MenuItem>
               </Select>
             </FormControl>
           </Grid>
@@ -433,9 +449,10 @@ const AddProperty = () => {
                 value={furnished}
                 onChange={(e) => setFurnished(e.target.value)}
               >
-                <MenuItem value="Full furnished">Full furnished</MenuItem>
+                <MenuItem value="Furnished">Furnished</MenuItem>
                 <MenuItem value="Semi furnished">Semi furnished</MenuItem>
-                <MenuItem value="No">No</MenuItem>
+                <MenuItem value="Un furnished">Un furnished</MenuItem>
+                <MenuItem value="N/A">N/A</MenuItem>
               </Select>
             </FormControl>
           </Grid>
@@ -448,7 +465,8 @@ const AddProperty = () => {
                 value={lift}
                 onChange={(e) => setLift(e.target.value)}
               >
-                <MenuItem value="Available">Available</MenuItem>
+                <MenuItem value="Yes">Yes</MenuItem>
+                <MenuItem value="No">No</MenuItem>
                 <MenuItem value="N/A">N/A</MenuItem>
               </Select>
             </FormControl>
@@ -462,7 +480,8 @@ const AddProperty = () => {
                 value={carParking}
                 onChange={(e) => setCarParking(e.target.value)}
               >
-                <MenuItem value="Available">Available</MenuItem>
+                <MenuItem value="OCP">OCP</MenuItem>
+                <MenuItem value="CCP">CCP</MenuItem>
                 <MenuItem value="N/A">N/A</MenuItem>
               </Select>
             </FormControl>
@@ -569,7 +588,7 @@ const AddProperty = () => {
             variant="contained"
             type="submit"
           >
-            Submit
+            Add
           </Button>
 
           <Button

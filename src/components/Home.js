@@ -147,32 +147,39 @@ function Home() {
                 data-aos-duration="1750"
                 data-aos-easing="ease-in-out"
               >
-                <Button
-                  sx={{
-                    display: "flex",
-                    gap: "10px",
-                    color: "black",
-                    fontSize: "16px",
-                    textTransform: "none",
+                <Link
+                  to="/properties/residential/buy"
+                  style={{
+                    textDecoration: "none",
                   }}
                 >
-                  <Box
+                  <Button
                     sx={{
-                      borderRadius: "50%",
-                      background: "white",
-                      height: "30px",
-                      width: "30px",
                       display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
+                      gap: "10px",
+                      color: "black",
+                      fontSize: "16px",
+                      textTransform: "none",
                     }}
                   >
-                    <Inventory sx={{ color: "black", fontSize: "16px" }} />
-                  </Box>
-                  <span style={{ fontWeight: "bold", fontSize: "16px" }}>
-                    Buy
-                  </span>
-                </Button>
+                    <Box
+                      sx={{
+                        borderRadius: "50%",
+                        background: "white",
+                        height: "30px",
+                        width: "30px",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Inventory sx={{ color: "black", fontSize: "16px" }} />
+                    </Box>
+                    <span style={{ fontWeight: "bold", fontSize: "16px" }}>
+                      Buy
+                    </span>
+                  </Button>
+                </Link>
               </Grid>
               <Grid
                 item
@@ -182,40 +189,39 @@ function Home() {
                 data-aos-duration="2000"
                 data-aos-easing="ease-in-out"
               >
-                <Button
-                  sx={{
-                    display: "flex",
-                    gap: "10px",
-                    color: "black",
-                    fontSize: "16px",
-                    textTransform: "none",
+                <Link
+                  to="sale"
+                  style={{
+                    textDecoration: "none",
                   }}
                 >
-                  <Box
+                  <Button
                     sx={{
-                      borderRadius: "50%",
-                      background: "white",
-                      height: "30px",
-                      width: "30px",
                       display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Sell sx={{ color: "black", fontSize: "18px" }} />
-                  </Box>
-                  <Link
-                    to="sale"
-                    style={{
-                      fontWeight: "bold",
-                      fontSize: "16px",
-                      textDecoration: "none",
+                      gap: "10px",
                       color: "black",
+                      fontSize: "16px",
+                      textTransform: "none",
                     }}
                   >
-                    Sale
-                  </Link>
-                </Button>
+                    <Box
+                      sx={{
+                        borderRadius: "50%",
+                        background: "white",
+                        height: "30px",
+                        width: "30px",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Sell sx={{ color: "black", fontSize: "18px" }} />
+                    </Box>
+                    <span style={{ fontWeight: "bold", fontSize: "16px" }}>
+                      Sale
+                    </span>
+                  </Button>
+                </Link>
               </Grid>
               <Grid
                 item
@@ -225,40 +231,46 @@ function Home() {
                 data-aos-duration="2250"
                 data-aos-easing="ease-in-out"
               >
-                <Button
-                  size="small"
-                  sx={{
-                    display: "flex",
-                    gap: "5px",
-                    color: "black",
-                    fontSize: "16px",
-                    textTransform: "none",
+                <Link
+                  to="/properties/residential/rent"
+                  style={{
+                    textDecoration: "none",
                   }}
                 >
-                  <Box
+                  <Button
+                    size="small"
                     sx={{
-                      borderRadius: "50%",
-                      height: "30px",
-                      width: "30px",
                       display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      background: "white",
+                      gap: "5px",
+                      color: "black",
+                      fontSize: "16px",
+                      textTransform: "none",
                     }}
                   >
-                    <AutoStories sx={{ color: "black", fontSize: "18px" }} />
-                  </Box>
-                  <span style={{ fontWeight: "bold", fontSize: "16px" }}>
-                    Rental
-                  </span>
-                </Button>
+                    <Box
+                      sx={{
+                        borderRadius: "50%",
+                        height: "30px",
+                        width: "30px",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        background: "white",
+                      }}
+                    >
+                      <AutoStories sx={{ color: "black", fontSize: "18px" }} />
+                    </Box>
+                    <span style={{ fontWeight: "bold", fontSize: "16px" }}>
+                      Rental
+                    </span>
+                  </Button>
+                </Link>
               </Grid>
             </Grid>
           </Box>
-          <Box mt={10}>
-            <AllProperty />
-          </Box>
+          <ClientCount />
         </Container>
+        <AllProperty />
         <Box sx={{ background: "#FEF7F6", mt: 5 }}>
           <Services />
         </Box>
@@ -267,9 +279,7 @@ function Home() {
         >
           <ContactBanner />
         </Container>
-        <Container sx={{ mt: 10, mb: 5 }}>
-          <ClientCount />
-        </Container>
+
         <Modal open={playVideo}>
           <Box sx={style}>
             <VideoPlay handleClose={handleClose} />

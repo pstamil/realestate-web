@@ -9,10 +9,10 @@ function Premium() {
         sx={{
           width: "100%",
           backgroundImage: `url(${about})`,
-          height: "100vh",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
+          height: { xs: "60vh", sm: "60vh", md: "70vh", lg: "100vh" },
         }}
       ></Box>
       <Box
@@ -50,6 +50,7 @@ function Premium() {
           sx={{
             fontSize: { xs: "13px", sm: "16px", md: "16px", lg: "16px" },
             m: "0 20px",
+            textAlign: "center",
           }}
         >
           We're on a Mission to Change View of Real Estate Field.

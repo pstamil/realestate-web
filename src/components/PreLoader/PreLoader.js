@@ -1,6 +1,5 @@
 import React from "react";
 import { Box } from "@mui/material";
-import Loader from "../../assets/loader.gif";
 import Loading from "../../assets/Loading.svg";
 
 const Preloader = () => {
@@ -22,7 +21,7 @@ const Preloader = () => {
           src={Loading}
           alt="loader"
           style={{ width: "60px", height: "60px" }}
-          className="loader"
+          className="preLoader"
         />
         <span>Find Your Heaven!!</span>
       </Box>

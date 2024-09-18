@@ -15,34 +15,36 @@ const LoginPage = ({ setIsAuthenticated }) => {
   const [passwordError, setPasswordError] = useState(false);
 
   useEffect(() => {
-    if (username !== "admin" && username !== "") {
-      setUsernameError(true);
-    } else if (password !== "admin123" && password !== "") {
-      setPasswordError(true);
-    } else {
-      setPasswordError(false);
-      setUsernameError(false);
-    }
+    setUsernameError(false);
+    setPasswordError(false);
   }, [username, password]);
+
+  useEffect(() => {
+    // Check if the user is already authenticated
+    const storedUserRole = localStorage.getItem("userRole"); // You can use localStorage or sessionStorage
+    if (storedUserRole) {
+      setIsAuthenticated(storedUserRole);
+      navigate(`/${storedUserRole}`); // Redirect to the appropriate dashboard
+    }
+  }, [navigate, setIsAuthenticated]);
 
   const handleLogin = (e) => {
     e.preventDefault();
-
-    // Reset error messages
     setUsernameError(false);
     setPasswordError(false);
 
-    // Check if the entered values match the mentioned values
+    // Perform role-based authentication
     if (username === "admin" && password === "admin123") {
-      setIsAuthenticated(true);
+      localStorage.setItem("userRole", "admin"); // Store user role
+      setIsAuthenticated("admin");
       navigate("/admin");
-    } else if (username !== "admin" && username !== "") {
-      setUsernameError(true);
-    } else if (password !== "admin123" && password !== "") {
-      setPasswordError(true);
+    } else if (username === "employee" && password === "employee123") {
+      localStorage.setItem("userRole", "employee"); // Store user role
+      setIsAuthenticated("employee");
+      navigate("/employee");
     } else {
-      setPasswordError(false);
-      setUsernameError(false);
+      setUsernameError(true);
+      setPasswordError(true);
     }
   };
 

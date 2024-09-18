@@ -64,16 +64,16 @@ function FAQ() {
         sx={{
           width: "100%",
           backgroundImage: `url(${faq})`,
-          height: "100vh",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
+          height: { xs: "60vh", sm: "60vh", md: "70vh", lg: "100vh" },
         }}
       ></Box>
       <Box
         sx={{
           position: "absolute",
-          top: { xs: "14%", sm: "15%", md: "18%", lg: "18%" },
+          top: { xs: "10%", sm: "15%", md: "18%", lg: "18%" },
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
@@ -89,7 +89,11 @@ function FAQ() {
       >
         <Typography
           variant="h1"
-          sx={{ fontSize: "48px", fontWeight: "bold", mb: 2 }}
+          sx={{
+            fontSize: { xs: "40px", sm: "40px", md: "48px", lg: "48px" },
+            fontWeight: "bold",
+            mb: 2,
+          }}
           data-aos="fade-right"
           data-aos-offset="200"
           data-aos-delay="50"
@@ -143,15 +147,15 @@ function FAQ() {
             mt={5}
             sx={{
               display: "flex",
-              justifyContent: "start",
-              bgcolor: "#F5F5F5",
-              alignItems: "center",
-              borderRadius: "10px",
+              justifyContent: "center",
+              alignItems: "start",
             }}
           >
             <Box
               sx={{
-                padding: "20px",
+                padding: "30px",
+                borderRadius: "10px",
+                bgcolor: "#F5F5F5",
                 display: "flex",
                 flexDirection: {
                   xs: "column",

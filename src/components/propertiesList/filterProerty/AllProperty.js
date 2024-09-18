@@ -7,14 +7,17 @@ import {
   Grid,
   Divider,
   Box,
+  Container,
+  IconButton,
 } from "@mui/material";
-import { Pagination } from "@mui/material";
 import {
   BedOutlined,
   BusinessOutlined,
   ControlCameraOutlined,
+  East,
   PhotoSizeSelectSmallOutlined,
   PlaceOutlined,
+  West,
 } from "@mui/icons-material";
 import { Link as RouterLink } from "react-router-dom";
 import axios from "axios";
@@ -178,8 +181,8 @@ function shuffleArray(array) {
 }
 
 const AllProperty = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6;
+  const [currentPage, setCurrentPage] = useState(0);
+  const [properyPerPage, setPropertyPerPage] = useState(3);
 
   const [data, setData] = useState([]);
 
@@ -201,49 +204,121 @@ const AllProperty = () => {
     getData();
   }, []);
 
-  const handlePageChange = (event, newPage) => {
-    setCurrentPage(newPage);
-    window.scrollTo({ top: 650, behavior: "smooth" });
+  const totalPageCount = Math.ceil(data.length / properyPerPage);
+
+  const nextPage = () => {
+    setCurrentPage((prevPage) =>
+      prevPage < totalPageCount - 1 ? prevPage + 1 : prevPage
+    );
   };
 
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+  const prevPage = () => {
+    setCurrentPage((prevPage) => (prevPage > 0 ? prevPage - 1 : prevPage));
+  };
+
+  const startIndex = currentPage * properyPerPage;
+  const endIndex = startIndex + properyPerPage;
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 600) {
+        setPropertyPerPage(1);
+      } else if (window.innerWidth < 960) {
+        setPropertyPerPage(2);
+      } else if (window.innerWidth < 1200) {
+        setPropertyPerPage(2);
+      } else {
+        setPropertyPerPage(3);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
-    <>
-      <h1
-        style={{
-          fontWeight: "bold",
-          marginBottom: "30px",
-          padding: "10px 0",
-          borderBottom: "2px solid #EB6753",
-        }}
-      >
-        Discover Popular Properties
-      </h1>
-      <Grid container spacing={3} mt={1}>
-        {currentItems &&
-          currentItems.map((property) => (
-            <PropertyCard key={property.id} property={property} />
-          ))}
-      </Grid>
+    <Box sx={{ display: "flex", mt: 5, mb: 10, bgcolor: "#F8F9FA" }}>
+      <Container>
+        <Box
+          sx={{
+            mb: 5,
+            mt: 10,
+            display: "flex",
+            flexDirection: "column",
+            gap: 2,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+          data-aos="fade-down"
+          data-aos-offset="100"
+          data-aos-delay="50"
+          data-aos-duration="1000"
+          data-aos-easing="ease-in-out"
+        >
+          <hr
+            style={{
+              background: "#7A73EA",
+              width: "40px",
+              height: "3px",
+              border: "none",
+            }}
+          />
+          <h1 style={{ fontWeight: "500" }}>Popular Properties</h1>
+        </Box>
+        <Grid container spacing={3} mt={1}>
+          {data.length > 0 ? (
+            data
+              .slice(startIndex, endIndex)
+              .map((property) => (
+                <PropertyCard key={property.id} property={property} />
+              ))
+          ) : (
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                flexDirection: "column",
+                gap: 5,
+                width: "100%",
+                height: 390,
+              }}
+            >
+              <Box className="loader" sx={{ color: "#ff5a5f" }}></Box>
+              <p style={{ fontSize: "13px", fontWeight: "300" }}>Loading...</p>
+            </Box>
+          )}
+        </Grid>
 
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "start",
-          width: "100%",
-          mt: 5,
-        }}
-      >
-        <Pagination
-          count={Math.ceil(data.length / itemsPerPage)}
-          page={currentPage}
-          onChange={handlePageChange}
-        />
-      </Box>
-    </>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: 2,
+            mb: 5,
+            mt: 5,
+          }}
+        >
+          <IconButton
+            onClick={prevPage}
+            disabled={currentPage === 0}
+            disableRipple
+          >
+            <West fontSize="large" />
+          </IconButton>
+          <IconButton
+            onClick={nextPage}
+            disabled={currentPage === totalPageCount - 1}
+            disableRipple
+          >
+            <East fontSize="large" />
+          </IconButton>
+        </Box>
+      </Container>
+    </Box>
   );
 };
 

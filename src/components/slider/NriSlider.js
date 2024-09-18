@@ -19,7 +19,7 @@ function NriSlider() {
     <Box>
       <SimpleImageSlider
         width="100%"
-        height={650}
+        height="100vh"
         images={images}
         autoPlay={true}
         autoPlayDelay={50}

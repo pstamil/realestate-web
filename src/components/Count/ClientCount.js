@@ -15,7 +15,7 @@ function ClientCount() {
       onEnter={() => setCounterOn(true)}
       onExit={() => setCounterOn(false)}
     >
-      <Grid container>
+      <Grid container mt={5} mb={5} sx={{ padding: "10px 0" }}>
         <Grid item xs={6} sm={6} md={3} lg={3}>
           <Box
             sx={{
@@ -29,7 +29,7 @@ function ClientCount() {
             <img
               src={agent}
               alt="agentimg"
-              style={{ width: "50px", height: "50px" }}
+              style={{ width: "40px", height: "40px" }}
             />
             <h1>
               {counterOn && (
@@ -61,7 +61,7 @@ function ClientCount() {
             <img
               src={location}
               alt="loactionimg"
-              style={{ width: "50px", height: "50px" }}
+              style={{ width: "40px", height: "40px" }}
             />
             <h1>
               {counterOn && (
@@ -99,7 +99,7 @@ function ClientCount() {
             <img
               src={property}
               alt="propertyimg"
-              style={{ width: "50px", height: "50px" }}
+              style={{ width: "40px", height: "40px" }}
             />
             <h1>
               {counterOn && (
@@ -137,7 +137,7 @@ function ClientCount() {
             <img
               src={sold}
               alt="soldimg"
-              style={{ width: "50px", height: "50px" }}
+              style={{ width: "40px", height: "40px" }}
             />
             <h1>
               {counterOn && (
